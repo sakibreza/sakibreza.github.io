@@ -11780,7 +11780,7 @@ div#notebook {
 <p><h2>Segment the Heart</h2>
 Here, we'll work with <b>magnetic resonance (MR)</b> imaging data from the <b>Sunnybrook Cardiac Dataset</b>. The full image is a 3D time series spanning a single heartbeat. These data are used by radiologists to measure the ejection fraction: the proportion of blood ejected from the left ventricle during each stroke.</p>
 <p>To begin, segment the left ventricle from a single slice of the volume (im). First, you'll filter and mask the image; then you'll label each object with ndi.label().
-<img src="img14.jpg"></p>
+<img src="img14.JPG"></p>
 
 </div>
 </div>
@@ -11825,7 +11825,7 @@ Here, we'll work with <b>magnetic resonance (MR)</b> imaging data from the <b>Su
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><b>Output:</b><br>
 Num. Labels: 26
-<img src="img15.jpg"></p>
+<img src="img15.JPG"></p>
 
 </div>
 </div>
@@ -11841,7 +11841,7 @@ Labels are like object "handles" - they give you a way to pick up whole sets of 
 <li>Create a mask of matching pixels.<br></li>
 </ol>
 <p>Here we will create a labeled array from the provided mask. Then, find the label value for the centrally-located left ventricle, and create a mask for it.</p>
-<p><img src="img16.jpg"></p>
+<p><img src="img16.JPG"></p>
 
 </div>
 </div>
@@ -11873,7 +11873,7 @@ Labels are like object "handles" - they give you a way to pick up whole sets of 
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><b>Output:</b>
-<img src="img17.jpg"></p>
+<img src="img17.JPG"></p>
 
 </div>
 </div>
@@ -11925,7 +11925,7 @@ Extracting objects from the original image eliminates unrelated pixels and provi
 <p><b>Output:</b><br>
 Number of objects: 1<br>
 Indices for first box: (slice(107, 149, None), slice(116, 162, None))<br>
-<img src="img17.jpg"></p>
+<img src="img17.JPG"></p>
 
 </div>
 </div>
@@ -12020,7 +12020,7 @@ A poor tissue segmentation includes multiple tissue types, leading to a wide dis
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><b>Output:</b><br>
-<img src="img19.jpg"></p>
+<img src="img19.JPG"></p>
 
 </div>
 </div>
@@ -12067,7 +12067,7 @@ A distance transformation calculates the distance from each pixel to a given poi
 <p><b>Output:</b><br>
 Max distance (mm): 16.320510697696196<br>
 Max location: (5, 129, 137)<br></p>
-<p><img src="img20.jpg"></p>
+<p><img src="img20.JPG"></p>
 
 </div>
 </div>
@@ -12114,7 +12114,7 @@ The distance transformation reveals the most embedded portions of an object. On 
 <p><b>Output:</b><br>
 Label 1 center: (4.9149927898701, 125.72786150646698, 141.42957762070142)<br>
 Label 2 center: (5.458351990999034, 121.50943176720855, 121.72954667630684)<br></p>
-<p><img src="img21.jpg"></p>
+<p><img src="img21.JPG"></p>
 
 </div>
 </div>
@@ -12163,7 +12163,7 @@ The ejection fraction is the proportion of blood squeezed out of the left ventri
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><b>Output:</b><br>
-<img src="img22.jpg"></p>
+<img src="img22.JPG"></p>
 
 </div>
 </div>
@@ -12213,7 +12213,7 @@ The ejection fraction is defined as:</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><b>Output:</b><br>
-<img src="img23.jpg">
+<img src="img23.JPG">
 Est. ejection volume (mm^3): 31268.00536236538<br>
 Est. ejection fraction: 0.3202054794520548<br></p>
 
