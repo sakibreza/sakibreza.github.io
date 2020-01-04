@@ -11898,7 +11898,7 @@ div#notebook {
         <span class="n">data_format</span><span class="o">=</span><span class="s1">&#39;channels_last&#39;</span>  
     <span class="p">)</span>
     
-    <span class="c1"># Upsampling (linear) layer</span>
+    <span class="c1"># Upsampling (nearest neighbor interpolation) layer</span>
     <span class="n">db</span> <span class="o">=</span> <span class="n">UpSampling2D</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))(</span><span class="n">inputs</span><span class="p">)</span>
     <span class="c1"># First conv2D layer </span>
     <span class="n">db</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="n">mid_channels</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">**</span><span class="n">conv_kwargs</span><span class="p">)(</span><span class="n">db</span><span class="p">)</span>
