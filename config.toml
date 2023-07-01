@@ -59,25 +59,30 @@ title = "Sakib Reza"
             class = "fas fa-envelope"
             url = "mailto:reza.s@northeastern.edu"
             weight = 1
+        [params.social.linkedin]
+            name = "LinkedIn"
+            class = "fab fa-linkedin"
+            url = "https://www.linkedin.com/in/sakibreza"
+            weight = 2
+        [params.social.linkedin]
+            name = "Twitter"
+            class = "fab fa-twitter"
+            url = "https://twitter.com/sakib_reza"
+            weight = 3
         [params.social.github]
             name = "GitHub"
             class = "fab fa-github"
             url = "https://github.com/sakibreza"
-            weight = 2
+            weight = 4
         [params.social.google_scholar]
             name = "Google Scholar"
             class = "ai ai-google-scholar-square"
             url = "https://scholar.google.com/citations?user=gBAA-V8AAAAJ&hl=en"
-            weight = 3
+            weight = 5
         [params.social.institution]
             name = "My institution"
             class = "fas fa-university"
             url = "https://www.sail-nu.com/sakib-reza"
-            weight = 5
-        [params.social.linkedin]
-            name = "LinkedIn"
-            class = "fab fa-linkedin"
-            url = "https://linkedin.com/in/matilda-backendal"
             weight = 6
         
 
