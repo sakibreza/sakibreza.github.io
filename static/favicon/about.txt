@@ -1,6 +1,6 @@
-This favicon was generated using the following font:
+This favicon was generated using the following graphics from Twitter Twemoji:
 
-- Font Title: Cutive Mono
-- Font Author: Copyright 2012 The Cutive Project Authors (vern@newtypography.co.uk)
-- Font Source: http://fonts.gstatic.com/s/cutivemono/v14/m8JWjfRfY7WVjVi2E-K9H5RFRG-K3Mud.ttf
-- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))
+- Graphics Title: 1f97d.svg
+- Graphics Author: Copyright 2020 Twitter, Inc and other contributors (https://github.com/twitter/twemoji)
+- Graphics Source: https://github.com/twitter/twemoji/blob/master/assets/svg/1f97d.svg
+- Graphics License: CC-BY 4.0 (https://creativecommons.org/licenses/by/4.0/)

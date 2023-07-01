@@ -16,6 +16,10 @@ header .title {
     font-display: swap;
 }
 
+header ul li a i {
+    color: $text-color;
+}
+
 @media only screen and (max-width: 600px) {
 
     header .title {

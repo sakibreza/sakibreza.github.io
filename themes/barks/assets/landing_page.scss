@@ -1,12 +1,19 @@
 .landing-page-wrapper {
-    display: flex; 
+    display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center; /* Updated property */
+    align-items: center; /* Updated property */
 }
 
 .landing-page-content {
-    width: 64%; 
+    width: 67%; 
+    align-items: center;
+    display: inline-flex;
+}
+
+.landing-page-content2 {
+    width: 100%; 
     align-items: center;
     display: inline-flex;
 }

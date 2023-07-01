@@ -1,4 +1,17 @@
 
 <header>
-    <a href="/" class="title">{{ .Site.Title | safeHTML }}</a>    
+    <a href="/" class="title">{{ .Site.Title | safeHTML }}</a>   
+    <br><br>Computer Vision & Mixed Reality Enthusiast<br><br>
+    {{ if isset .Site.Params "social" }}
+    {{ with .Site.Params.social }}
+        <ul>
+            {{ range sort . "weight" }}
+            <li style="display: inline; margin-right: 10px;">
+                <a href="{{ .url }}" title="{{ .name }}" target="_blank"><i class="{{ .class }}"></i></a>
+            </li>
+            {{ end }}
+        </ul>
+    {{ end }}
+    {{ end }}
+    
 </header>

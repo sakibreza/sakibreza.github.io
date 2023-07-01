@@ -17,17 +17,17 @@ title = "Sakib Reza"
     url  = "/"
     weight = 1
 [[menu.main]]
-    name = "About"
-    url  = "/about"
+    name = "Publications"
+    url  = "https://scholar.google.com/citations?hl=en&user=gBAA-V8AAAAJ"
     weight = 2
 [[menu.main]]
-    name = "Publications"
-    url  = "/publications"
-    weight = 2
-#[[menu.main]]
-#    name = "Teaching"
-#    url  = "/teaching"
-#    weight = 2
+    name = "Projects"
+    url  = "/"
+    weight = 3
+[[menu.main]]
+    name = "Demos"
+    url  = "/"
+    weight = 4
 
 
 
