@@ -3,8 +3,8 @@ layout: landing_page
 image: avatar.jpg
 ---
 
-Hi, I'm Matilda,
+Hi, I'm Sakib,
 
-I am a doctoral student in the [Applied Cryptography group](https://appliedcrypto.ethz.ch/) at ETH Zurich, advised by Professor Kenny Paterson.
+I am a PhD student at Northeastern University.
 
-Please feel free to [get in touch](mailto:mbackendal@inf.ethz.ch)!
+Please feel free to [get in touch](mailto:reza.s@northeastern.edu)!

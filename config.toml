@@ -13,6 +13,10 @@ title = "Sakib Reza"
 
 # Main menu
 [[menu.main]]
+    name = "Home"
+    url  = "/"
+    weight = 2
+[[menu.main]]
     name = "About"
     url  = "/about"
     weight = 2
