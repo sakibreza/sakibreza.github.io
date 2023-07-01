@@ -15,7 +15,7 @@ title = "Sakib Reza"
 [[menu.main]]
     name = "Home"
     url  = "/"
-    weight = 2
+    weight = 1
 [[menu.main]]
     name = "About"
     url  = "/about"
@@ -68,20 +68,20 @@ title = "Sakib Reza"
             class = "fab fa-linkedin"
             url = "https://www.linkedin.com/in/sakibreza"
             weight = 2
-        [params.social.linkedin]
+        [params.social.twitter]
             name = "Twitter"
             class = "fab fa-twitter"
             url = "https://twitter.com/sakib_reza"
             weight = 3
-        [params.social.github]
-            name = "GitHub"
-            class = "fab fa-github"
-            url = "https://github.com/sakibreza"
-            weight = 4
         [params.social.google_scholar]
             name = "Google Scholar"
             class = "ai ai-google-scholar-square"
             url = "https://scholar.google.com/citations?user=gBAA-V8AAAAJ&hl=en"
+            weight = 4
+        [params.social.github]
+            name = "GitHub"
+            class = "fab fa-github"
+            url = "https://github.com/sakibreza"
             weight = 5
         [params.social.institution]
             name = "My institution"
