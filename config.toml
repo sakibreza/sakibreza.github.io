@@ -2,12 +2,12 @@
 # Global options
 baseURL = "/"
 canonifyURLs = true
-copyright = "© 2023 by Matilda Backendal. <a href='/privacy'>Privacy policy</a>."
+copyright = "© 2023 by Sakib Reza. <a href='/privacy'>Privacy policy</a>."
 defaultContentLanguage = "en"
 disableKinds = ["taxonomy", "taxonomyTerm"]
 languageCode = "en"
 theme = "barks"
-title = "Matilda Backendal"
+title = "Sakib Reza"
 
 
 
@@ -31,9 +31,9 @@ title = "Matilda Backendal"
 [params]
 
     [params.head]
-        author = "Matilda Backendal"
+        author = "Sakib Reza"
         custom_css = "/custom.css"
-        description = "Hi, I'm Matilda"
+        description = "Hi, I'm Sakib"
         keywords = ["cryptography", "academic", "ETH", "security", "doctorate"]
 
     [params.navigation]
@@ -57,34 +57,29 @@ title = "Matilda Backendal"
         [params.social.email]
             name = "E-Mail"
             class = "fas fa-envelope"
-            url = "mailto:mbackendal@inf.ethz.ch"
+            url = "mailto:reza.s@northeastern.edu"
             weight = 1
         [params.social.github]
             name = "GitHub"
             class = "fab fa-github"
-            url = "https://github.com/mbackendal"
+            url = "https://github.com/sakibreza"
             weight = 2
         [params.social.google_scholar]
             name = "Google Scholar"
             class = "ai ai-google-scholar-square"
-            url = "https://scholar.google.com/citations?user=oZZHf5EAAAAJ&hl=en"
+            url = "https://scholar.google.com/citations?user=gBAA-V8AAAAJ&hl=en"
             weight = 3
         [params.social.institution]
             name = "My institution"
             class = "fas fa-university"
-            url = "https://appliedcrypto.ethz.ch/people/person-detail.MjYyODM0.TGlzdC8zMzE4LC0yODgzMDgzMDc=.html"
+            url = "https://www.sail-nu.com/sakib-reza"
             weight = 5
         [params.social.linkedin]
             name = "LinkedIn"
             class = "fab fa-linkedin"
             url = "https://linkedin.com/in/matilda-backendal"
             weight = 6
-        [params.social.orcid]
-            name = "ORCID iD"
-            class = "fab fa-orcid"
-            url = "https://orcid.org/0000-0002-8677-8301"
-            weight = 7
-
+        
 
 
 # Options for Markdown renderer
