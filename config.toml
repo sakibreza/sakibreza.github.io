@@ -18,16 +18,13 @@ title = "Sakib Reza"
     weight = 1
 [[menu.main]]
     name = "Publications"
-    url  = "https://scholar.google.com/citations?hl=en&user=gBAA-V8AAAAJ"
+    url  = "https://scholar.google.com/citations?hl=en&user=gBAA-V8AAAAJ&view_op=list_works&sortby=pubdate"
     weight = 2
-[[menu.main]]
-    name = "Projects"
-    url  = "/"
-    weight = 3
+
 [[menu.main]]
     name = "Demos"
-    url  = "/"
-    weight = 4
+    url  = "/demos"
+    weight = 3
 
 
 
