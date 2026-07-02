@@ -17,6 +17,7 @@
       --muted: #666;
       --accent: #17442a;
       --border: #e8e4df;
+      --highlight-bg: #f0f6f2;
     }
 
     * { box-sizing: border-box; }
@@ -32,7 +33,7 @@
     a { color: var(--accent); }
 
     .page {
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 3rem 1.5rem 4rem;
     }
@@ -57,6 +58,18 @@
       font-weight: 700;
     }
 
+    .title-logo {
+      height: 1.35em;
+      width: auto;
+      vertical-align: -0.15em;
+      margin-right: 0.45rem;
+    }
+
+    h1 u {
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.12em;
+    }
+
     .authors {
       margin-bottom: 1.5rem;
       color: var(--muted);
@@ -78,6 +91,16 @@
       font-size: 0.95rem;
       color: var(--muted);
       margin-top: 0.5rem;
+    }
+
+    .affiliations a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .affiliations a:hover {
+      color: var(--accent);
+      text-decoration: underline;
     }
 
     .note {
@@ -143,11 +166,216 @@
       margin-right: 0.25em;
     }
 
+    section {
+      margin-bottom: 2.5rem;
+    }
+
     h2 {
       font-size: 1.25rem;
       margin: 0 0 0.75rem;
       padding-bottom: 0.35rem;
       border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin: 1.25rem 0 0.5rem;
+      font-weight: 600;
+    }
+
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.85rem;
+      margin: 1.25rem 0 0.5rem;
+    }
+
+    .highlight-card {
+      background: var(--highlight-bg);
+      border: 1px solid #d8e8de;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .highlight-card .value {
+      display: block;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+
+    .highlight-card .value.text {
+      font-size: 1.15rem;
+      letter-spacing: 0.01em;
+    }
+
+    .highlight-card .label {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+      line-height: 1.35;
+    }
+
+    .contrib-list {
+      margin: 0.75rem 0 0;
+      padding-left: 1.25rem;
+    }
+
+    .contrib-list li {
+      margin-bottom: 0.65rem;
+    }
+
+    .contrib-list ul {
+      margin: 0.4rem 0 0;
+      padding-left: 1.25rem;
+    }
+
+    figure.figure-padded img {
+      padding: 0.75rem;
+      background: #fff;
+      box-sizing: content-box;
+    }
+
+    figure.figure-70 img {
+      width: 70%;
+    }
+
+    figure.figure-half img {
+      width: 60%;
+    }
+
+    figure.figure-wide img {
+      width: 90%;
+    }
+
+    figure {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    figure img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    figcaption {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.6rem;
+      line-height: 1.45;
+      text-align: left;
+    }
+
+    .results-table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .results-table-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .results-table-grid .results-table-wrap {
+      margin: 0;
+    }
+
+    .results-table-grid h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    table.results {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      min-width: 520px;
+    }
+
+    table.results th,
+    table.results td {
+      padding: 0.45rem 0.55rem;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    table.results th {
+      background: #f4f2ef;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    table.results td:first-child,
+    table.results th:first-child {
+      text-align: left;
+      min-width: 160px;
+    }
+
+    table.results tr:last-child td {
+      border-bottom: none;
+    }
+
+    table.results tr.ours td {
+      background: #eef6f0;
+      font-weight: 600;
+    }
+
+    table.results tr.baseline td {
+      color: var(--muted);
+    }
+
+    .table-caption {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin: 0.5rem 0 0;
+      line-height: 1.45;
+    }
+
+    .result-callout {
+      background: var(--highlight-bg);
+      border-left: 3px solid var(--accent);
+      padding: 0.85rem 1rem;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .ablation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+
+    .ablation-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+    }
+
+    .ablation-item strong {
+      display: block;
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .ablation-item span {
+      font-size: 0.85rem;
+      color: var(--muted);
     }
 
     pre.bibtex {
@@ -158,6 +386,48 @@
       overflow-x: auto;
       font-size: 0.82rem;
       line-height: 1.5;
+      margin: 0;
+    }
+
+    .bibtex-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .bibtex-header h2 {
+      margin-bottom: 0;
+      padding-bottom: 0.35rem;
+      flex: 1;
+    }
+
+    .copy-bibtex {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--accent);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .copy-bibtex:hover {
+      border-color: var(--accent);
+      background: #f7faf8;
+    }
+
+    .copy-bibtex.copied {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
     }
 
     .podcast iframe {
@@ -180,6 +450,39 @@
       font-size: 0.9rem;
       color: var(--muted);
     }
+
+    #acknowledgments p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    #abstract {
+      background: var(--highlight-bg);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      padding: 1.25rem 1.5rem 1.35rem 1.35rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 1px 3px rgba(23, 68, 42, 0.06);
+    }
+
+    #abstract h2 {
+      border-bottom: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.85rem;
+      padding-bottom: 0;
+    }
+
+    #abstract p {
+      font-size: 1.02rem;
+      line-height: 1.75;
+      margin: 0;
+      color: var(--text);
+    }
   </style>
 </head>
 <body>
@@ -187,7 +490,7 @@
 
     <span class="venue">ECCV 2026</span>
 
-    <h1>OnPoint: Offline-to-Online Multi-Level Distillation for Point-Supervised Online Temporal Action Localization</h1>
+    <h1><img src="figures/paper_logo.png" alt="" class="title-logo">OnPoint: Offline-to-Online Multi-Level Distillation for <u>Point</u>-Supervised <u>On</u>line Temporal Action Localization</h1>
 
     <div class="authors">
       <p>
@@ -198,9 +501,9 @@
         <strong><a href="https://www.andreafanelli.info/" target="_blank" rel="noopener noreferrer">Andrea Fanelli</a></strong><sup>2</sup>
       </p>
       <p class="affiliations">
-        <sup>1</sup>Northeastern University &nbsp;
-        <sup>2</sup>Dolby Laboratories &nbsp;
-        <sup>3</sup>Georgia Institute of Technology
+        <sup>1</sup><a href="https://www.northeastern.edu/" target="_blank" rel="noopener noreferrer">Northeastern University</a> &nbsp;
+        <sup>2</sup><a href="https://www.dolby.com/" target="_blank" rel="noopener noreferrer">Dolby Laboratories</a> &nbsp;
+        <sup>3</sup><a href="https://www.gatech.edu/" target="_blank" rel="noopener noreferrer">Georgia Institute of Technology</a>
       </p>
       <p class="note"><sup>*</sup>Work primarily done during an internship at Dolby Laboratories.</p>
     </div>
@@ -208,11 +511,41 @@
     <div class="links">
       <a href="https://arxiv.org/abs/2607.00289" target="_blank" rel="noopener noreferrer"><i class="ai ai-arxiv"></i>arXiv</a>
       <a href="https://arxiv.org/pdf/2607.00289" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i>PDF</a>
+      <a href="#bibtex"><i class="fas fa-quote-right"></i>BibTeX</a>
       <a href="#podcast"><i class="fas fa-podcast"></i>Podcast</a>
-      <span><i class="fas fa-image"></i>Poster (coming soon)</span>
       <span><i class="fas fa-video"></i>Video (coming soon)</span>
       <a href="/OnPoint/implementation/"><i class="fas fa-list-check"></i>Implementation guide<sup>†</sup></a>
     </div>
+
+    <section id="highlights">
+      <h2>Highlights</h2>
+      <p>
+        We introduce <strong>Point-Supervised Online Temporal Action Localization (POTAL)</strong>, which localizes actions in streaming video using only one timestamp per training instance, and propose <strong>OnPoint</strong> as the first framework for this setting.
+        OnPoint is also the first offline-to-online distillation approach for temporal action localization, with consistent gains across five benchmarks.
+      </p>
+      <div class="highlights">
+        <div class="highlight-card">
+          <span class="value text">New task</span>
+          <span class="label">First formulation of POTAL: point-supervised, strictly online action localization</span>
+        </div>
+        <div class="highlight-card">
+          <span class="value text">OnPoint</span>
+          <span class="label">First framework for POTAL: point-supervised online TAL</span>
+        </div>
+        <div class="highlight-card">
+          <span class="value text">Distillation</span>
+          <span class="label">First offline-to-online distillation framework for temporal action localization</span>
+        </div>
+        <div class="highlight-card">
+          <span class="value">5</span>
+          <span class="label">Datasets with consistent gains:<br>THUMOS'14, EGTEA, HOI4D-O, EPIC-K100, FineAction</span>
+        </div>
+        <div class="highlight-card">
+          <span class="value">+7%</span>
+          <span class="label">Up to +7% mAP over strong baselines on POTAL (THUMOS'14)</span>
+        </div>
+      </div>
+    </section>
 
     <section class="podcast" id="podcast">
       <h2>Podcast</h2>
@@ -220,16 +553,249 @@
       <p class="podcast-note">Generated by NotebookLM.</p>
     </section>
 
-    <section>
+    <section id="abstract">
       <h2>Abstract</h2>
       <p>
         Temporal Action Localization (TAL) typically relies on segment annotations or offline access to full videos, limiting scalability and online use. We introduce Point-Supervised Online TAL (POTAL), which localizes actions in streaming videos using only one temporal point per instance. To solve POTAL, we propose OnPoint, an offline-to-online multi-level distillation framework that transfers knowledge from a point-supervised offline teacher to an online student via (i) pseudo-segment instance distillation, (ii) class-activation sequence distillation, and (iii) anticipatory window-level distillation. We further improve robustness by incorporating the original point labels into student training and by refining anchor decoding with actionness-guided attention calibration. Experiments on five datasets show OnPoint consistently outperforms strong baselines, establishing a solid foundation for POTAL.
       </p>
     </section>
 
-    <section>
-      <h2>BibTeX</h2>
-      <pre class="bibtex">@inproceedings{reza2026onpoint,
+    <section id="potal">
+      <h2>The POTAL Task</h2>
+      <p>
+        <strong>Point-Supervised Online Temporal Action Localization (POTAL)</strong> combines two practical constraints that existing methods address only separately:
+        strict online inference (no future frames, no offline revision) and point-level supervision (one timestamp and class label per action instance during training).
+        At inference, the model must emit action proposals immediately as segments end.
+      </p>
+      <figure class="figure-70 figure-padded">
+        <img src="figures/potal_teaser.png" alt="POTAL task illustration showing point supervision during training and online inference">
+        <figcaption><strong>POTAL setting.</strong> Training uses sparse point labels; inference localizes actions online from observed frames only, without access to future context.</figcaption>
+      </figure>
+    </section>
+
+    <section id="method">
+      <h2>OnPoint Framework</h2>
+      <p>
+        OnPoint distills knowledge from a frozen, point-supervised offline teacher into a causal online student.
+        The teacher leverages full-video context to generate pseudo segments, class activation sequences (CAS), and future-window cues;
+        the student processes sliding windows and learns from multi-level supervision plus direct anchor-level point labels.
+      </p>
+      <figure class="figure-padded">
+        <img src="figures/framework_overview.png" alt="OnPoint framework overview with offline teacher and online student">
+        <figcaption><strong>Framework overview.</strong> Multi-level distillation transfers instance-level pseudo labels, frame-level CASS alignment, and window-level anticipation from the offline teacher. Anchor-level point supervision and actionness-calibrated decoding stabilize training under noisy pseudo labels.</figcaption>
+      </figure>
+
+      <h3>Key contributions</h3>
+      <ol class="contrib-list">
+        <li><strong>POTAL task &amp; benchmarks.</strong> First formulation combining online inference with point supervision, with protocols and strong baselines.</li>
+        <li><strong>Multi-level offline-to-online distillation.</strong>
+          <ul>
+            <li><strong>Instance-level:</strong> pseudo segment distillation for anchor classification and regression.</li>
+            <li><strong>Frame-level (CASS):</strong> class-activation sub-sequence alignment for dense temporal guidance.</li>
+            <li><strong>Window-level (WAD):</strong> anticipatory distillation of next-window action likelihoods.</li>
+          </ul>
+        </li>
+        <li><strong>Anchor-level point supervision.</strong> Direct point labels on anchors stabilize training and improve robustness to teacher noise.</li>
+        <li><strong>Actionness-guided attention calibration (ASAC).</strong> CASS-derived actionness scores refine cross-attention in the anchor decoder.</li>
+      </ol>
+    </section>
+
+    <section id="results">
+      <h2>Results</h2>
+
+      <div class="result-callout">
+        On THUMOS'14, OnPoint achieves <strong>61.9</strong> avg mAP (tIoU 0.1–0.5), outperforming the strongest POTAL baseline (HR-Pro + OAT-ONMS: 55.7) by <strong>+6.2</strong> and gaining up to <strong>+7.0</strong> at individual thresholds. It also surpasses several fully supervised online methods despite using only point labels.
+      </div>
+
+      <h3>THUMOS'14 (Online + Point methods)</h3>
+      <div class="results-table-wrap">
+        <table class="results">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>0.1</th>
+              <th>0.2</th>
+              <th>0.3</th>
+              <th>0.4</th>
+              <th>0.5</th>
+              <th>Avg<br>0.1:0.5</th>
+              <th>Avg<br>0.1:0.7</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="baseline">
+              <td>Distillation-free baseline*</td>
+              <td>59.9</td>
+              <td>45.8</td>
+              <td>31.8</td>
+              <td>18.4</td>
+              <td>10.3</td>
+              <td>33.3</td>
+              <td>24.8</td>
+            </tr>
+            <tr class="baseline">
+              <td>HR-Pro + OAT-ONMS*</td>
+              <td>66.6</td>
+              <td>63.7</td>
+              <td>58.7</td>
+              <td>49.3</td>
+              <td>40.1</td>
+              <td>55.7</td>
+              <td>46.3</td>
+            </tr>
+            <tr class="ours">
+              <td>OnPoint (Ours)</td>
+              <td>73.6</td>
+              <td>70.3</td>
+              <td>63.9</td>
+              <td>56.3</td>
+              <td>45.2</td>
+              <td>61.9</td>
+              <td>51.1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-caption">* Baselines reproduced by the authors. Full comparison with offline, fully supervised, and online methods is in the <a href="https://arxiv.org/pdf/2607.00289" target="_blank" rel="noopener noreferrer">paper</a>.</p>
+
+      <h3>EGTEA &amp; HOI4D-O (Online + Point methods)</h3>
+      <div class="results-table-grid">
+        <div>
+          <h4>EGTEA, mAP@tIoU (%)</h4>
+          <div class="results-table-wrap">
+            <table class="results">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>0.1</th>
+                  <th>0.2</th>
+                  <th>0.3</th>
+                  <th>0.4</th>
+                  <th>0.5</th>
+                  <th>Avg</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="baseline">
+                  <td>TSASPC + OAT-ONMS*</td>
+                  <td>27.0</td>
+                  <td>24.4</td>
+                  <td>20.8</td>
+                  <td>16.0</td>
+                  <td>10.3</td>
+                  <td>19.7</td>
+                </tr>
+                <tr class="ours">
+                  <td>OnPoint (Ours)</td>
+                  <td>30.9</td>
+                  <td>28.6</td>
+                  <td>24.5</td>
+                  <td>18.9</td>
+                  <td>12.6</td>
+                  <td>23.1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h4>HOI4D-O, mAP@tIoU (%)</h4>
+          <div class="results-table-wrap">
+            <table class="results">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>0.1</th>
+                  <th>0.2</th>
+                  <th>0.3</th>
+                  <th>0.4</th>
+                  <th>0.5</th>
+                  <th>Avg</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="baseline">
+                  <td>TSASPC + OAT-ONMS*</td>
+                  <td>55.9</td>
+                  <td>52.6</td>
+                  <td>45.2</td>
+                  <td>35.2</td>
+                  <td>22.6</td>
+                  <td>42.3</td>
+                </tr>
+                <tr class="ours">
+                  <td>OnPoint (Ours)</td>
+                  <td>58.2</td>
+                  <td>53.5</td>
+                  <td>47.4</td>
+                  <td>37.4</td>
+                  <td>26.4</td>
+                  <td>44.6</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <p>
+        On <strong>FineAction</strong>, OnPoint reaches <strong>7.4%</strong> avg mAP (+2.1% over the best baseline).
+        On <strong>EPIC-Kitchens-100</strong>, avg mAP improves from <strong>8.5%</strong> to <strong>10.5%</strong>.
+      </p>
+    </section>
+
+    <section id="analysis">
+      <h2>Analysis</h2>
+
+      <div class="ablation-grid">
+        <div class="ablation-item">
+          <strong>−4.4%</strong>
+          <span>Avg mAP drop when removing CASS distillation and anticipation (WAD)</span>
+        </div>
+        <div class="ablation-item">
+          <strong>−2.0%</strong>
+          <span>Avg mAP drop without actionness-calibrated attention (ASAC)</span>
+        </div>
+        <div class="ablation-item">
+          <strong>−3.5%</strong>
+          <span>Avg mAP drop without anchor-level point supervision</span>
+        </div>
+        <div class="ablation-item">
+          <strong>312 FPS</strong>
+          <span>Online inference speed (93M params, 2.88 GFLOPs)</span>
+        </div>
+      </div>
+
+      <figure class="figure-half">
+        <img src="figures/noise_robustness.png" alt="Robustness to offline teacher noise with and without anchor-level point supervision">
+        <figcaption><strong>Robustness to teacher noise.</strong> Anchor-level point supervision keeps performance stable as pseudo-label noise increases, combining reliable point GT with teacher guidance.</figcaption>
+      </figure>
+      <figure class="figure-wide">
+        <img src="figures/window_attention_calib.png" alt="Attention calibration effect on a long jump sequence">
+        <figcaption><strong>Attention calibration.</strong> ASAC sharpens attention on action frames and suppresses background, improving anchor feature quality.</figcaption>
+      </figure>
+    </section>
+
+    <section id="qualitative">
+      <h2>Qualitative Results</h2>
+      <figure class="figure-70">
+        <img src="figures/qualitative_baseball_pitch.png" alt="Qualitative comparison on THUMOS Baseball Pitch">
+        <figcaption><strong>Baseball Pitch (THUMOS'14).</strong> Both methods detect the action, but OnPoint provides tighter and more complete temporal boundaries than HR-Pro + OAT-ONMS.</figcaption>
+      </figure>
+      <figure class="figure-70">
+        <img src="figures/qualitative_throw_discus.png" alt="Qualitative comparison on THUMOS Throw Discus">
+        <figcaption><strong>Throw Discus (THUMOS'14).</strong> The baseline misses a subtle instance; OnPoint detects all occurrences with well-aligned boundaries.</figcaption>
+      </figure>
+    </section>
+
+    <section id="bibtex">
+      <div class="bibtex-header">
+        <h2>BibTeX</h2>
+        <button type="button" class="copy-bibtex" id="copy-bibtex-btn" aria-label="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i><span>Copy</span>
+        </button>
+      </div>
+      <pre class="bibtex" id="bibtex-content">@inproceedings{reza2026onpoint,
   title     = {OnPoint: Offline-to-Online Multi-Level Distillation for Point-Supervised Online Temporal Action Localization},
   author    = {Reza, Sakib and Jagatap, Gauri and Moghaddam, Mohsen and Camps, Octavia and Fanelli, Andrea},
   booktitle = {European Conference on Computer Vision (ECCV)},
@@ -237,11 +803,37 @@
 }</pre>
     </section>
 
+    <section id="acknowledgments">
+      <h2>Acknowledgments</h2>
+      <p>
+        This work was supported in part by the U.S. National Science Foundation (NSF) under Grant No. FW-HTF-2128743 and by the Office of Naval Research (ONR) under Grant No. N00014-21-1-2431.
+        Any opinions, findings, conclusions, or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the NSF or ONR.
+      </p>
+    </section>
+
     <footer>
-      Accepted at ECCV 2026.<br>
-      This page is still under construction.<br><br>
-      <span class="link-footnote"><sup>†</sup>Source code cannot be released due to an NDA; the implementation guide describes how to re-implement OnPoint using public components and paper details.</span>
+      Accepted at ECCV 2026.<br><br>
+      <span class="link-footnote"><sup>†</sup>Source code cannot be released due to an NDA; the <a href="/OnPoint/implementation/">implementation guide</a> describes how to re-implement OnPoint using public components and paper details.</span>
     </footer>
   </div>
+  <script>
+    (function () {
+      var btn = document.getElementById('copy-bibtex-btn');
+      var pre = document.getElementById('bibtex-content');
+      if (!btn || !pre) return;
+
+      btn.addEventListener('click', function () {
+        var label = btn.querySelector('span');
+        navigator.clipboard.writeText(pre.textContent.trim()).then(function () {
+          btn.classList.add('copied');
+          label.textContent = 'Copied!';
+          setTimeout(function () {
+            btn.classList.remove('copied');
+            label.textContent = 'Copy';
+          }, 2000);
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
