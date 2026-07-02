@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Implementation guide for OnPoint (ECCV 2026)">
+  <title>OnPoint · Implementation Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" crossorigin="anonymous">
+  <style>
+    :root {
+      --bg: #fcfbf9;
+      --text: #333;
+      --muted: #666;
+      --accent: #17442a;
+      --border: #e8e4df;
+      --code-bg: #f4f2ef;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", "Source Sans Pro", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a { color: var(--accent); }
+
+    .layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      line-height: 1.2;
+      margin: 0 0 0.5rem;
+    }
+
+    .subtitle { color: var(--muted); margin-bottom: 1.5rem; }
+
+    .note {
+      background: #f7faf8;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      padding: 0.9rem 1rem;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .toc {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .toc h2 {
+      margin: 0 0 0.75rem;
+      font-size: 1rem;
+      border: none;
+      padding: 0;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 1.25rem;
+      columns: 2;
+      column-gap: 2rem;
+    }
+
+    @media (max-width: 700px) { .toc ol { columns: 1; } }
+
+    section { margin-bottom: 2.5rem; scroll-margin-top: 1rem; }
+
+    h2 {
+      font-size: 1.3rem;
+      margin: 0 0 0.85rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.08rem;
+      margin: 1.5rem 0 0.6rem;
+    }
+
+    h4 {
+      font-size: 1rem;
+      margin: 1.1rem 0 0.45rem;
+      color: var(--text);
+    }
+
+    p, ul, ol { margin: 0 0 1rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin-bottom: 0.35rem; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 0 1rem;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.55rem 0.65rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: var(--code-bg); font-weight: 600; }
+
+    code {
+      background: var(--code-bg);
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      font-size: 0.88em;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.15rem;
+      overflow-x: auto;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      margin: 0 0 1rem;
+    }
+
+    .step {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.15rem;
+      margin-bottom: 1rem;
+    }
+
+    .step-num {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    .formula {
+      background: #fff;
+      border: 1px dashed var(--border);
+      padding: 0.75rem 1rem;
+      margin: 0.5rem 0 1rem;
+      overflow-x: auto;
+      font-size: 0.92rem;
+    }
+
+    footer {
+      margin-top: 2rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <a class="back" href="/OnPoint/"><i class="fas fa-arrow-left"></i>OnPoint project page</a>
+
+    <h1>Implementation Guide</h1>
+    <p class="subtitle">OnPoint: Offline-to-Online Multi-Level Distillation for Point-Supervised Online Temporal Action Localization · ECCV 2026</p>
+
+    <div class="note">
+      <strong>NDA notice.</strong> Full source code cannot be released due to an active Non-Disclosure Agreement. This guide is derived from the paper and supplementary material and is intended to let researchers re-implement OnPoint from public components. Paper: <a href="https://arxiv.org/abs/2607.00289" target="_blank" rel="noopener noreferrer">arXiv:2607.00289</a>.
+    </div>
+
+    <div class="note">
+      If you have any questions or need support while implementing this work, please contact the author at <a href="mailto:reza.s@northeastern.edu">reza.s@northeastern.edu</a>.
+    </div>
+
+    <nav class="toc">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#overview">Overview &amp; pipeline</a></li>
+        <li><a href="#problem">Problem definition (POTAL)</a></li>
+        <li><a href="#phase1">Phase 1 — Data &amp; features</a></li>
+        <li><a href="#phase2">Phase 2 — Offline teacher</a></li>
+        <li><a href="#phase3">Phase 3 — Pseudo labels</a></li>
+        <li><a href="#phase4">Phase 4 — Online student architecture</a></li>
+        <li><a href="#phase5">Phase 5 — Losses &amp; training</a></li>
+        <li><a href="#phase6">Phase 6 — Inference &amp; evaluation</a></li>
+        <li><a href="#baseline">Distillation-free baseline</a></li>
+        <li><a href="#hyperparams">Hyperparameters</a></li>
+        <li><a href="#environment">Environment &amp; seeds</a></li>
+        <li><a href="#checklist">Implementation checklist</a></li>
+      </ol>
+    </nav>
+
+    <section id="overview">
+      <h2>1. Overview &amp; pipeline</h2>
+      <p>OnPoint is a <strong>two-stage</strong> framework:</p>
+      <ol>
+        <li>Train a <strong>point-supervised offline teacher</strong> on full videos (HR-Pro for THUMOS'14, TSASPC for EGTEA/HOI4D-O).</li>
+        <li>Freeze the teacher and train an <strong>online student</strong> (built on OAT) with multi-level distillation plus direct point supervision.</li>
+      </ol>
+      <pre>Video features
+    │
+    ├─► [Offline teacher] ──► CAS sequence A
+    │                         Pseudo segments (s̃, ẽ, ã, p̃)
+    │
+    └─► [Online student, sliding window at each t]
+            Transformer encoder → F_t
+                ├─ CASS predictor → Â_t          (distill from A_t^teacher)
+                ├─ Anticipation head → ŷ         (distill from future CAS)
+                ├─ Anchor decoder → Z            (actionness-calibrated)
+                │     ├─ Instance cls/reg heads  (supervised by pseudo segments)
+                │     └─ Point cls/reg heads     (supervised by point GT)
+                └─ ONMS post-processing → final proposals</pre>
+      <p><strong>Recommended starting point:</strong> fork <a href="https://github.com/YHKimGithub/OAT-OSN/" target="_blank" rel="noopener noreferrer">OAT</a> for the online backbone and anchor pipeline, then add the four OnPoint modules described below.</p>
+    </section>
+
+    <section id="problem">
+      <h2>2. Problem definition (POTAL)</h2>
+      <p><strong>Point-Supervised Online Temporal Action Localization (POTAL)</strong> detects action segments in a streaming video using only <em>one temporal point + class label</em> per action instance at training time.</p>
+      <ul>
+        <li>Input at time <em>t</em>: partial video V<sub>1:t</sub> (no future frames).</li>
+        <li>Output: proposals (ŝ, ê, â, p̂) with start/end times, class, confidence.</li>
+        <li>Proposals are emitted online and <strong>cannot be revised</strong> once published.</li>
+        <li>Goal: recover the full action set Ψ = {(ŝ<sub>k</sub>, ê<sub>k</sub>, â<sub>k</sub>)} sequentially.</li>
+      </ul>
+    </section>
+
+    <section id="phase1">
+      <h2>3. Phase 1 — Data &amp; features</h2>
+
+      <h3>3.1 Datasets</h3>
+      <table>
+        <thead>
+          <tr><th>Dataset</th><th>Notes</th><th>Point labels</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>THUMOS'14</td>
+            <td>413 sports videos, 20 classes, ~15 instances/video</td>
+            <td>Use point annotations from Lee et al. (LACP), provided in HR-Pro repo</td>
+          </tr>
+          <tr>
+            <td>EGTEA</td>
+            <td>Egocentric kitchen, 22 classes, dense actions</td>
+            <td>Sample one point per instance from Gaussian centered at midpoint, σ = duration/6</td>
+          </tr>
+          <tr>
+            <td>HOI4D-O</td>
+            <td>553 egocentric office videos, 12 classes</td>
+            <td>Same Gaussian point sampling as EGTEA</td>
+          </tr>
+          <tr>
+            <td>EPIC-Kitchens-100, FineAction</td>
+            <td>Additional benchmarks in supplement</td>
+            <td>Same point generation procedure</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>ActivityNet v1.3 is excluded from OnTAL evaluation (videos usually contain one long action).</p>
+
+      <h3>3.2 Pre-extracted features</h3>
+      <table>
+        <thead>
+          <tr><th>Dataset</th><th>Feature extractor</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>THUMOS (online student)</td>
+            <td>Two-stream TSN, Kinetics-pretrained</td>
+            <td><a href="https://github.com/YHKimGithub/OAT-OSN/" target="_blank" rel="noopener noreferrer">OAT repo</a></td>
+          </tr>
+          <tr>
+            <td>THUMOS (offline teacher)</td>
+            <td>I3D features + point labels</td>
+            <td><a href="https://github.com/pipixin321/HR-Pro" target="_blank" rel="noopener noreferrer">HR-Pro repo</a></td>
+          </tr>
+          <tr>
+            <td>EGTEA</td>
+            <td>I3D at 24 FPS, stride 12 (2 vectors/sec)</td>
+            <td><a href="https://github.com/sakibreza/ECCV24-HAT" target="_blank" rel="noopener noreferrer">HAT repo</a></td>
+          </tr>
+          <tr>
+            <td>HOI4D-O</td>
+            <td>CLIP-ViT features</td>
+            <td>Follow HAT / prior HOI4D feature extraction</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Project all features to dimension <code>D = 1024</code> before the online transformer encoder (match OAT feature dim).</p>
+    </section>
+
+    <section id="phase2">
+      <h2>4. Phase 2 — Offline teacher</h2>
+
+      <div class="step">
+        <span class="step-num">Step 4.1</span>
+        <h3>Choose backbone</h3>
+        <ul>
+          <li><strong>THUMOS'14 (sparse actions):</strong> train HR-Pro with point labels. Use repo defaults.</li>
+          <li><strong>EGTEA / HOI4D-O (dense/procedural):</strong> train TSASPC — stages=4, layers=10, feature maps=64, feature dim=2048, batch=8, lr=0.0005.</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <span class="step-num">Step 4.2</span>
+        <h3>Train with point supervision only</h3>
+        <p>Follow each repo's point-supervised training recipe. The teacher outputs:</p>
+        <ul>
+          <li>Per-frame CAS: A ∈ ℝ<sup>T×(C+1)</sup> (C action classes + background)</li>
+          <li>After offline post-processing: pseudo segments (s̃, ẽ, ã, p̃)</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <span class="step-num">Step 4.3</span>
+        <h3>Freeze teacher for online training</h3>
+        <p>The offline teacher is <strong>not updated</strong> during online student training. Pre-compute and cache teacher outputs per video to speed up training.</p>
+      </div>
+    </section>
+
+    <section id="phase3">
+      <h2>5. Phase 3 — Generate pseudo labels for online training</h2>
+
+      <h3>THUMOS'14 (HR-Pro)</h3>
+      <ol>
+        <li>Run HR-Pro on each training video to obtain CAS A.</li>
+        <li>Extract <strong>intermediate reliable proposals</strong> (not final merged output) as pseudo segment GT for instance distillation.</li>
+        <li>Slice CAS to each online window: A<sub>t</sub><sup>teacher</sup> = A[t−W+1 : t].</li>
+        <li>Slice future CAS for anticipation: A[t+1 : t+W′] → binarize with threshold 0.5 → multi-hot target y.</li>
+      </ol>
+
+      <h3>EGTEA / HOI4D-O (TSASPC)</h3>
+      <ol>
+        <li>Run TSASPC to obtain per-frame CAS.</li>
+        <li>Build pseudo segments by grouping temporally adjacent frames with the same predicted class.</li>
+        <li>Align pseudo segments and CAS slices to each sliding window as above.</li>
+      </ol>
+
+      <h3>Anchor–pseudo matching (instance supervision)</h3>
+      <p>Follow OAT's anchor assignment: match each pseudo segment to anchors in the current window by temporal IoU / center overlap. Positive anchors receive classification + regression targets from the matched pseudo segment (same protocol as fully supervised OAT, but labels come from teacher).</p>
+    </section>
+
+    <section id="phase4">
+      <h2>6. Phase 4 — Online student architecture</h2>
+      <p>At each timestep t, form window X<sub>t</sub> ∈ ℝ<sup>W×D</sup> from the last W feature vectors. Pass through:</p>
+
+      <h3>6.1 Transformer encoder (from OAT)</h3>
+      <ul>
+        <li>3 transformer blocks, 8 attention heads each, hidden dim D=1024.</li>
+        <li>Output window features F<sub>t</sub> ∈ ℝ<sup>W×D</sup>.</li>
+      </ul>
+
+      <h3>6.2 CASS predictor (new)</h3>
+      <ul>
+        <li>Two-layer MLP per frame: Linear(D→D) → ReLU → Linear(D→C+1).</li>
+        <li>Output Â<sub>t</sub> ∈ ℝ<sup>W×(C+1)</sup>.</li>
+        <li>Use <strong>L2 (MSE) loss</strong> against teacher CAS slice (do not normalize to a probability simplex).</li>
+      </ul>
+      <div class="formula">L<sub>cass</sub> = (1/W) Σ<sub>i=1</sub><sup>W</sup> ‖Â<sub>t</sub>[i] − A<sub>t</sub><sup>teacher</sup>[i]‖₂²</div>
+
+      <h3>6.3 Anticipation head (new)</h3>
+      <ul>
+        <li>Linear(D → D/4) on F<sub>t</sub>, flatten, then FC → ReLU → FC → Sigmoid.</li>
+        <li>Output ŷ ∈ [0,1]<sup>C+1</sup> (multi-label).</li>
+        <li>Target: binarize teacher CAS over next W′ frames (threshold 0.5) → y ∈ {0,1}<sup>C+1</sup>.</li>
+        <li>Loss: binary cross-entropy over action classes.</li>
+      </ul>
+      <div class="formula">L<sub>ant</sub> = − Σ<sub>c=1</sub><sup>C</sup> [ y<sub>c</sub> log ŷ<sub>c</sub> + (1−y<sub>c</sub>) log(1−ŷ<sub>c</sub>) ]</div>
+      <p>Use fixed W′ per dataset (see hyperparameter table).</p>
+
+      <h3>6.4 Actionness-calibrated anchor decoder (new)</h3>
+      <p>Start from OAT's anchor decoder (5 transformer blocks, 4 heads). Replace standard cross-attention with calibrated attention:</p>
+      <ol>
+        <li>Initialize learnable anchor queries Q ∈ ℝ<sup>M×D</sup> (M anchors with fixed temporal scales).</li>
+        <li>Actionness from CASS background channel: r = 1 − σ(A<sub>t</sub>[:, C+1]).</li>
+        <li>Calibration: r̄ = r + log(r) (element-wise; clamp r for numerical stability).</li>
+        <li>K = Linear(F<sub>t</sub>), V = Linear(F<sub>t</sub>).</li>
+        <li>Each decoder layer:
+          <ul>
+            <li>Self-attention on Q.</li>
+            <li>Cross-attention: logits = QK<sup>⊤</sup>/√D + r̄<sup>⊤</sup>, α = Softmax(logits), context = α·V.</li>
+            <li>Q ← FeedForward(Q + context).</li>
+          </ul>
+        </li>
+        <li>Output anchor features Z = Q.</li>
+      </ol>
+
+      <h3>6.5 Instance prediction heads (from OAT)</h3>
+      <p>On each anchor feature in Z:</p>
+      <ul>
+        <li><strong>Classification head:</strong> anchor class + foreground/background (follow OAT).</li>
+        <li><strong>Regression head:</strong> temporal offsets/scales to refine anchor boundaries.</li>
+        <li>Supervised by matched pseudo segments → L<sub>ins</sub> = L<sub>ic</sub> + L<sub>ir</sub> (same as OAT).</li>
+      </ul>
+
+      <h3>6.6 Anchor-level point prediction (new)</h3>
+      <p>For each anchor, two two-layer MLP heads (ReLU between layers), input = anchor embedding ∈ ℝ<sup>D</sup>:</p>
+      <ul>
+        <li><strong>Classification:</strong> cross-entropy — does this anchor contain a point label, and which class?</li>
+        <li><strong>Regression:</strong> predict normalized distance d̂ = |c<sub>a</sub> − p| / l<sub>a</sub> (anchor center, point time, anchor length).</li>
+      </ul>
+      <div class="formula">L<sub>pnt</sub> = L<sub>pc</sub> + L<sub>pr</sub>, &nbsp; L<sub>pr</sub> = (1/N<sub>p</sub>) Σ |d̂<sub>j</sub> − |c<sub>a</sub> − p<sub>j</sub>| / l<sub>a</sub>|</div>
+      <p>Assign point labels to anchors whose temporal span contains the annotated point.</p>
+    </section>
+
+    <section id="phase5">
+      <h2>7. Phase 5 — Losses &amp; training</h2>
+
+      <h3>7.1 Total objective</h3>
+      <div class="formula">L<sub>total</sub> = α·L<sub>ins</sub> + β·L<sub>cass</sub> + γ·L<sub>ant</sub> + δ·L<sub>pnt</sub></div>
+      <p><strong>Recommended weights:</strong> α = β = δ = 1. Tune only γ (anticipation).</p>
+
+      <h3>7.2 Training loop (per iteration)</h3>
+      <ol>
+        <li>Sample a training video and timestep t (or a batch of windows).</li>
+        <li>Load feature window X<sub>t</sub>, teacher CAS slice, future CAS, pseudo segments, and point labels for that window.</li>
+        <li>Forward online student → compute all four losses.</li>
+        <li>Backpropagate L<sub>total</sub>; teacher remains frozen.</li>
+      </ol>
+
+      <h3>7.3 Optimizer</h3>
+      <ul>
+        <li>Adam, lr = 1e-4, weight decay = 1e-4, batch size = 128.</li>
+        <li>Train until convergence using the same epoch count / schedule as OAT for the target dataset.</li>
+      </ul>
+    </section>
+
+    <section id="phase6">
+      <h2>8. Phase 6 — Inference &amp; evaluation</h2>
+
+      <h3>8.1 Online inference</h3>
+      <ol>
+        <li>Stream features frame-by-frame; maintain a buffer of the last W features.</li>
+        <li>At each t, run encoder + anchor decoder + instance heads only (CASS/anticipation/point heads used at train time; instance heads drive inference).</li>
+        <li>Decode anchors to proposals {(ŝ<sub>k</sub>, ê<sub>k</sub>, â<sub>k</sub>, p̂<sub>k</sub>)} following OAT.</li>
+        <li>Apply <strong>Online NMS (ONMS)</strong> from MATR codebase:
+          <ul>
+            <li>Suppress proposals with high temporal overlap with already-selected ones.</li>
+            <li>Remove proposals whose end time ê &gt; current time t (wait for boundary confirmation).</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>8.2 Metrics</h3>
+      <ul>
+        <li><strong>Primary:</strong> mAP at tIoU thresholds {0.1, 0.2, 0.3, 0.4, 0.5} (and 0.6, 0.7 on THUMOS).</li>
+        <li>A prediction is correct iff class matches and tIoU ≥ threshold.</li>
+        <li><strong>Secondary:</strong> instance-level F1 at tIoU = 0.5.</li>
+      </ul>
+    </section>
+
+    <section id="baseline">
+      <h2>9. Distillation-free baseline</h2>
+      <p>To ablate distillation, remove L<sub>ins</sub> and train with <strong>anchor-level point supervision only</strong> (L<sub>pnt</sub> as primary signal):</p>
+      <ul>
+        <li>At inference, use point prediction head: if any class activation &gt; 0.1, treat anchor as proposal.</li>
+        <li>Use anchor boundaries + regressed center offset as segment; apply ONMS.</li>
+        <li>Without pseudo segments, the model cannot learn proper temporal scale, so performance is substantially lower than the full distillation-based model.</li>
+      </ul>
+    </section>
+
+    <section id="hyperparams">
+      <h2>10. Hyperparameters</h2>
+
+      <h3>Per-dataset online settings</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Dataset</th><th>W</th><th>M</th><th>Anchor lengths</th><th>W′</th><th>γ</th><th>Offline teacher</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>THUMOS'14</td><td>64</td><td>6</td><td>{4,8,16,32,48,64}</td><td>16</td><td>1.0</td><td>HR-Pro</td>
+          </tr>
+          <tr>
+            <td>EGTEA</td><td>24</td><td>7</td><td>{2,4,6,8,12,16,24}</td><td>12</td><td>0.8</td><td>TSASPC</td>
+          </tr>
+          <tr>
+            <td>HOI4D-O</td><td>56</td><td>6</td><td>{4,8,16,24,48,56}</td><td>16</td><td>0.8</td><td>TSASPC</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Shared online architecture</h3>
+      <ul>
+        <li>D = 1024, encoder: 3 blocks × 8 heads, decoder: 5 blocks × 4 heads</li>
+        <li>Batch size = 128, Adam lr = 1e-4, weight decay = 1e-4</li>
+        <li>α = β = δ = 1; tune γ only</li>
+      </ul>
+    </section>
+
+    <section id="environment">
+      <h2>11. Environment &amp; seeds</h2>
+      <h3>Hardware</h3>
+      <ul>
+        <li>Training: NVIDIA L4, 24 GB, Driver 535.183.06</li>
+        <li>Efficiency benchmark: RTX 4090 (same checkpoint)</li>
+      </ul>
+      <h3>Software</h3>
+      <ul>
+        <li>Python 3.10.18, PyTorch 2.5.1, CUDA 11.8, TorchVision 0.20.1</li>
+        <li>NumPy 2.0.1, SciPy 1.15.3, Pandas 2.3.1, Matplotlib 3.10.3, TensorBoard 2.19.0</li>
+      </ul>
+      <h3>Random seeds (single run per experiment)</h3>
+      <ul>
+        <li>Online model: <code>52</code></li>
+        <li>Offline HR-Pro: <code>0</code></li>
+        <li>Offline TSASPC: <code>1538574472</code></li>
+      </ul>
+      <h3>Public code dependencies</h3>
+      <table>
+        <thead><tr><th>Repo</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://github.com/pipixin321/HR-Pro" target="_blank" rel="noopener noreferrer">HR-Pro</a></td><td>Offline teacher (THUMOS), features &amp; point labels</td></tr>
+          <tr><td><a href="https://github.com/ddz16/TSASPC/" target="_blank" rel="noopener noreferrer">TSASPC</a></td><td>Offline teacher (EGTEA, HOI4D-O)</td></tr>
+          <tr><td><a href="https://github.com/YHKimGithub/OAT-OSN/" target="_blank" rel="noopener noreferrer">OAT</a></td><td>Online backbone, anchors, sliding window</td></tr>
+          <tr><td><a href="https://github.com/skhcjh231/MATR_codebase/" target="_blank" rel="noopener noreferrer">MATR</a></td><td>ONMS post-processing</td></tr>
+          <tr><td><a href="https://github.com/sakibreza/ECCV24-HAT" target="_blank" rel="noopener noreferrer">HAT</a></td><td>EGTEA features &amp; evaluation protocol</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="checklist">
+      <h2>12. Implementation checklist</h2>
+      <p>Use this list to track a from-scratch re-implementation:</p>
+      <ul>
+        <li>☐ Download dataset features and point labels for target benchmark</li>
+        <li>☐ Train / obtain checkpoint for offline teacher (HR-Pro or TSASPC)</li>
+        <li>☐ Pre-compute and cache per-video CAS and pseudo segments</li>
+        <li>☐ Implement sliding-window dataloader with teacher label alignment</li>
+        <li>☐ Port OAT transformer encoder + anchor instance heads</li>
+        <li>☐ Add CASS predictor + L2 distillation loss</li>
+        <li>☐ Add anticipation head + BCE on binned future CAS</li>
+        <li>☐ Modify anchor decoder cross-attention with r̄ = r + log(r) bias</li>
+        <li>☐ Add anchor-level point cls/reg heads + L1 regression</li>
+        <li>☐ Combine losses with α=β=δ=1, tune γ</li>
+        <li>☐ Integrate ONMS at inference</li>
+        <li>☐ Evaluate mAP@tIoU (and optionally instance-level F1)</li>
+      </ul>
+    </section>
+
+    <footer>
+      Guide compiled from the OnPoint paper and supplementary material. Cite: <a href="https://arxiv.org/abs/2607.00289" target="_blank" rel="noopener noreferrer">arXiv:2607.00289</a>.
+    </footer>
+  </div>
+</body>
+</html>
